@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Toko Buku Farriz</title>
+<link rel ="stylesheet" href ="style.css">
+</head>
+<body>
+  <nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="Produk.html">Produk</a></li>
+    <li><a href="Bedah-Buku.html">Bedah Buku Artikel</a></li>
+    <li><a href="Testimoni.html">Testimoni</a></li>
+    <li><a href="Tampil Testimoni.html">Tampilan Testimoni</a></li>
+    <li><a href="Video produk event.html">Video produk event</a></li>
+    <li><a href="Kontak.html">Kontak</a></li>
+  </ul>
+</nav>
+</head>
+<body>
+    <main class="formulir">
+    <h2>Testimoni-testimoni pembeli :</h2>
+    <div id="daftarTestimoni"></div>
+    <button id="hapusSemua">Hapus Semua Testimoni</button>
+  </div>
+
+    <section>
+    <div id="daftarTestimoni"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Toko Buku Farriz</p>
+  </footer>
+
+   <script>
+    const container = document.getElementById('daftarTestimoni');
+    const testimoniList = JSON.parse(localStorage.getItem('testimoniList')) || [];
+
+    if (testimoniList.length === 0) {
+      container.innerHTML = "<p>Belum ada testimoni.</p>";
+    } else {
+      testimoniList.forEach((t, i) => {
+        const el = document.createElement('div');
+        el.className = 'testimoni-box';
+        el.innerHTML = `
+          <p><strong>Nama:</strong> ${t.nama}</p>
+          <p><strong>Email:</strong> ${t.email}</p>
+          <p><strong>Pesan:</strong> ${t.pesan}</p>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+
+      document.getElementById("hapusSemua").addEventListener("click", function() {
+      const konfirmasi = confirm("Apakah Anda yakin ingin menghapus semua testimoni?");
+      if (konfirmasi) {
+        localStorage.removeItem("testimoniList");
+        location.reload();
+         
+      }
+       });
+  </script>
+</body>
